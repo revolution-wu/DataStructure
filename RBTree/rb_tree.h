@@ -169,6 +169,7 @@ public:
 	//typedef select1st<value_type> KeyOfValue;
 	//typedef RBTree<T, VALUE, Compare> RBTree;
 	RBTree()
+        :m_size(0)
 	{
 		//m_header.reset(new Node());
 		init();
@@ -493,6 +494,7 @@ typename RBTree<T, VALUE, Compare>::iterator RBTree<T, VALUE, Compare>::insert(i
 			m_header->left->left = newNode;
 			m_header->left = newNode;
 			addNodeAndRebalance(newNode);
+            ++m_size;
 			return iterator(newNode);
 		}
 		return insert(value);	
@@ -505,6 +507,7 @@ typename RBTree<T, VALUE, Compare>::iterator RBTree<T, VALUE, Compare>::insert(i
 			newNode->parent = m_header->right;
 			m_header->right->right = newNode;
 			m_header->right = newNode;
+            ++m_size;
 			addNodeAndRebalance(newNode);
 			return iterator(newNode);
 		}
@@ -687,7 +690,7 @@ void RBTree<T, VALUE, Compare>::removeAndRebalance(RBTreeNodePtr node)
 			if (isBlack(brother->left) && isBlack(brother->right))
 			{
 				//cout << " brother left child and right child is black " << endl;
-				bool parentBlack = isBlack(parent);
+				//bool parentBlack = isBlack(parent);
 
 				setRed(brother);
 
@@ -733,7 +736,7 @@ void RBTree<T, VALUE, Compare>::removeAndRebalance(RBTreeNodePtr node)
 			//兄弟节点是黑色并且左右子节点都是黑色，代表兄弟不能借元素给自己，去父亲借
 			if (isBlack(brother->left) && isBlack(brother->right))
 			{
-				bool parentBlack = isBlack(parent);
+				//bool parentBlack = isBlack(parent);
 				setRed(brother);  //兄弟染红，父亲染黑
 				
 				//如果父亲是黑色的，则代表父亲也不能借
@@ -773,14 +776,14 @@ void RBTree<T, VALUE, Compare>::removeAndRebalance(RBTreeNodePtr node)
 template<typename T, typename VALUE, typename Compare>
 size_t RBTree<T, VALUE, Compare>::erase(const T& key)
 {
-	int count = 0;
+	size_t element_count = 0;
 	iterator removeNode = find(key);
 	if (removeNode != end())
 	{
 		remove(removeNode.nodePtr);
-		return ++count;
+		return ++element_count;
 	}
-	return count;
+	return element_count;
 }
 
 template<typename T, typename VALUE, typename Compare>

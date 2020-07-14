@@ -10,7 +10,7 @@
 #include <string>
 #include <vector>
 #include <algorithm>
-#include "rb_Tree.h"
+#include "rb_tree.h"
 #include "Timer.h"
 using std::cout;
 using std::endl;
@@ -233,9 +233,9 @@ void testStd()
 	std::vector<std::pair<int, int>> v;
 	cout << "--------------test refer to std::copy--------------" << endl;
 	std::copy(b.begin(), b.end(), std::back_inserter(v));
-	for (const auto& it : v)
+	for (const auto& it2 : v)
 	{
-		cout << "frist: " << it.first << " second: " << it.second << endl;
+		cout << "frist: " << it2.first << " second: " << it2.second << endl;
 	}
 }
 
@@ -254,7 +254,7 @@ void testTime(int size)
 		}
 	}
 	
-	assert(rb.size() == size);
+	assert(rb.size() == static_cast<size_t>(size));
 	{
 		Timer t(true);
 		cout << "rbtree find : " << size / 2 << ": ";
@@ -296,6 +296,7 @@ void testTime(int size)
 		}
 	}
 	
+    cout << "map size: " << m.size() << endl;
 	{
 		Timer t(true);
 		cout << "map find : " << size / 2 << ": ";
@@ -316,7 +317,6 @@ void testTime(int size)
 		cout << "map erase " << size / 2 << " : ";
 		m.erase(mapIt);
 	}
-	cout << " map: "<<mapIt._Ptr->_Myval.first << endl;
 	cout << "--------------test vector--------------" << endl;
 	std::vector<std::pair<int ,int>> vec;
 
@@ -359,6 +359,5 @@ int main(int argc, char* argv[])
 	testInsertRange(5000000);
 	testTime(1000000);
 
-	system("pause");
 	return 0;
 }
