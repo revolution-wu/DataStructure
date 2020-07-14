@@ -28,8 +28,8 @@ BSTree<int> * test01()
 	}
 	//b->preorderTraversal();
 	int size = 0;
-	int h = b->height(&size);
-	printf("高度: %d\n", h);
+	size_t h = b->height(&size);
+	printf("高度: %lu\n", h);
 	printf("高度: %d\n", b->getHeight());
 	
 	printf("叶子节点数量:%d\n", size);
@@ -118,7 +118,7 @@ void test02()
 	b.insert(8);
 	//b.insert(12);
 	b.clear();
-	printf("删除后size: %d\n", b.size());
+	printf("删除后size: %lu\n", b.size());
 	b.InOrder();
 	b.remove(4);
 	b.InOrder();

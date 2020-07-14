@@ -1,6 +1,4 @@
-﻿#define  _CRT_SECURE_NO_WARNINGS 
-
-#include <string.h>
+﻿#include <string.h>
 #include <stdlib.h>
 #include <assert.h>
 #include <iostream>
@@ -129,6 +127,5 @@ int main(int argc, char* argv[])
 	testTimer(kSize);
 	testIterator();
 	cout << "---------------------" << endl;
-	system("pause");
 	return 0;
 }

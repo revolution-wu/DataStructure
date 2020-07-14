@@ -133,13 +133,13 @@ namespace structure
 		//得到随机的层数
 		int randomLevel()
 		{
-			int level = 1;
-			while (random() < p && level < kFixSize)
+			int rand_level = 1;
+			while (random() < p && rand_level < kFixSize)
 			{
-				++level;
+				++rand_level;
 			}
 
-			return level;
+			return rand_level;
 		}
 
 		//将数组的各个指针置为null;

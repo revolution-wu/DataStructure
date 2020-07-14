@@ -5,7 +5,6 @@
 #include <vector>
 #include <stack>
 
-int size = 0;
 template<typename T>
 struct BSTreeNode
 {
@@ -51,7 +50,7 @@ public:
 	void postOrder() const;
 
 	//求树的高度，sizeNum是叶子节点的数量
-	int height(int* sizeNum) const;
+	size_t height(int* sizeNum) const;
 	int getHeight() const { return getHeight(root_); }
 	void reverseTree() { reverseTree(root_); }
 	bool isEmpty() const { return size_ == 0; }
@@ -288,13 +287,13 @@ void BSTree<T>::postOrder() const
 }
 //求一个数的高度，通用算法
 template<typename T>
-int BSTree<T>::height(int * sizeNum) const
+size_t BSTree<T>::height(int * sizeNum) const
 {
 	if (!root_) return 0;
 	std::queue<BSTreeNode<T>*> q;
-	int height = 0;
+	size_t tree_height = 0;
 	//保存着每层的数量
-	int size = 1;
+	size_t level_size = 1;
 	q.push(root_);
 	while (!q.empty())
 	{
@@ -304,7 +303,7 @@ int BSTree<T>::height(int * sizeNum) const
 			(*sizeNum)++;
 		}
 		q.pop();
-		size--;
+		level_size--;
 		if (node->left_ != nullptr)
 		{
 			q.push(node->left_);
@@ -317,14 +316,14 @@ int BSTree<T>::height(int * sizeNum) const
 		//每层的最后一个元素已经出队，size为0，也意味着这个元素的子节点入队，
 		//因此这时队列里面保存的就是全部的下一层元素
 		//这时让size等于下一层的数量，也就是队列元素的数量
-		if (size == 0)
+		if (level_size == 0)
 		{
-			size = q.size();
-			height++;
+			level_size = q.size();
+			tree_height++;
 		}
 	}
 
-	return height;
+	return tree_height;
 }
 
 template<typename T>

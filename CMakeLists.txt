@@ -36,3 +36,5 @@ add_subdirectory(AVLTree)
 add_subdirectory(RBTree)
 
 add_subdirectory(bstTree)
+
+add_subdirectory(Datastructure)
